@@ -10,7 +10,8 @@ color brown = #996633;
 color white = #ffffff;
 
 PImage map;
-int gridSize = 8;
+int gridSize = 16;
+float zoom = 1.5;
 boolean upkey, downkey, leftkey, rightkey, wkey, akey, skey, dkey, qkey, ekey, spacekey;
 FPlayer player;
 
@@ -43,7 +44,15 @@ void loadPlayer(){
 }
 void draw() {
   background(white);
+  drawWorld();
+  player.act();
+}
+
+void drawWorld(){
+  pushMatrix();
+  translate(-player.getX()* zoom + width/2,-player.getY()*zoom+height/2);
+  scale(zoom);
   world.step();
   world.draw();
-  player.act();
+  popMatrix();
 }
