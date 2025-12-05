@@ -1,14 +1,15 @@
 import fisica.*;
 FWorld world;
 
+color yellowGreen = #a8e61d;
 color black = #000000;
-color green = #00FF00;
-color red = #FF0000;
-color blue = #0000FF;
+color green = #22b14c;
+color red = #ed1c24;
+color blue = #00b7ef;
 color orange = #F0A000;
-color brown = #996633;
+color brown = #9c5a3c;
 color white = #ffffff;
-
+color lightGreen = #d3f9bc;
 PImage map;
 int gridSize = 16;
 float zoom = 1.5;
@@ -23,7 +24,7 @@ void setup() {
   loadPlayer();
 }
 void loadWorld(PImage map) {
-  world = new FWorld(-2000, -2000, 2000, 2000);
+  world = new FWorld(-4000, -4000, 4000, 4000);
   world.setGravity(0, 900);
 
   for (int y = 0; y < map.height; y++) {
@@ -34,11 +35,54 @@ void loadWorld(PImage map) {
         b.setPosition(x*gridSize, y*gridSize);
         b.setStatic(true);
         world.add(b);
+        b.setFillColor(black);
+      }
+      if (c == blue) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(blue);
+      }
+      if (c == brown) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(brown);
+      }
+      if (c == yellowGreen) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(yellowGreen);
+      }
+      if (c == lightGreen) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(lightGreen);
+      }
+      if (c == green) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(green);
+      }
+      if (c == red) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        world.add(b);
+        b.setFillColor(red);
       }
     }
   }
 }
-void loadPlayer(){
+void loadPlayer() {
   player = new FPlayer();
   world.add(player);
 }
@@ -48,9 +92,9 @@ void draw() {
   player.act();
 }
 
-void drawWorld(){
+void drawWorld() {
   pushMatrix();
-  translate(-player.getX()* zoom + width/2,-player.getY()*zoom+height/2);
+  translate(-player.getX()* zoom + width/2, -player.getY()*zoom+height/2);
   scale(zoom);
   world.step();
   world.draw();
