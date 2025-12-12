@@ -10,7 +10,7 @@ color orange = #F0A000;
 color brown = #9c5a3c;
 color white = #ffffff;
 color lightGreen = #d3f9bc;
-PImage map;
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW;
 int gridSize = 16;
 float zoom = 1.5;
 boolean upkey, downkey, leftkey, rightkey, wkey, akey, skey, dkey, qkey, ekey, spacekey;
@@ -24,6 +24,7 @@ void setup() {
   loadPlayer();
 }
 void loadWorld(PImage map) {
+
   world = new FWorld(-4000, -4000, 4000, 4000);
   world.setGravity(0, 900);
 
@@ -36,6 +37,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(black);
+        b.setNoStroke();
       }
       if (c == blue) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -43,6 +45,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(blue);
+        b.setNoStroke();
       }
       if (c == brown) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -50,6 +53,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(brown);
+        b.setNoStroke();
       }
       if (c == yellowGreen) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -57,6 +61,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(yellowGreen);
+        b.setNoStroke();
       }
       if (c == lightGreen) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -64,6 +69,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(lightGreen);
+        b.setNoStroke();
       }
       if (c == green) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -71,6 +77,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(green);
+        b.setNoStroke();
       }
       if (c == red) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -78,6 +85,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         world.add(b);
         b.setFillColor(red);
+        b.setNoStroke();
       }
     }
   }
