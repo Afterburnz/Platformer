@@ -28,7 +28,7 @@ class FGoomba extends FGameObject {
   }
 
   void collide() {
-    if (isTouching("wall")) {
+    if (isTouching("wall") || isTouching("goomba")) {
       direction *= -1;
       setPosition(getX()+direction, getY());
     }
@@ -36,9 +36,9 @@ class FGoomba extends FGameObject {
       if (player.getY() < getY() - gridSize/2) {
         world.remove(this);
         enemies.remove(this);
-        player.setVelocity(player.getVelocityX(),-300);
+        player.setVelocity(player.getVelocityX(), -300);
       } else {
-        player.setPosition(0,0);
+        player.setPosition(0, 0);
       }
     }
   }

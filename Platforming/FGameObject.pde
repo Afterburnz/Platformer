@@ -11,12 +11,16 @@ class FGameObject extends FBox {
 
   boolean isTouching(String n) {
     ArrayList<FContact> contacts = getContacts();
+
     for ( int i = 0; i < contacts.size(); i++) {
       FContact fc = contacts.get(i);
-      if (fc.contains(n)) {
-        return true;
-      }
+      FBody a = fc.getBody1();
+      FBody b = fc.getBody2();
+      if (this == a) return b.getName().equals(n);
+      else return a.getName().equals(n);
     }
     return false;
   }
+
+
 }

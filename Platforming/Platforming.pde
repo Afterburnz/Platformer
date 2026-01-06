@@ -84,6 +84,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(black);
         b.setNoStroke();
+        b.setName("ground");
       } else if (c == gray) {
         FBox b =  new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
@@ -99,6 +100,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(blue);
         b.setNoStroke();
+        b.setName("ice");
       } else if (c == brown) {
         FBox b =  new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
