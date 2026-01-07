@@ -16,8 +16,10 @@ class FGameObject extends FBox {
       FContact fc = contacts.get(i);
       FBody a = fc.getBody1();
       FBody b = fc.getBody2();
-      if (this == a) return b.getName().equals(n);
-      else return a.getName().equals(n);
+      if (this == a) return fc.getBody2().getName()==n;
+      else return fc.getBody1().getName()==n;
+        
+      
     }
     return false;
   }

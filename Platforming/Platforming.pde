@@ -126,19 +126,19 @@ void loadWorld(PImage map) {
         b.setName("treetop");
         b.setFillColor(green);
         world.add(b);
-      } else if (c == green && w == green && e == green) {
-        FBox b =  new FBox(gridSize, gridSize);
-        b.setPosition(x*gridSize, y*gridSize);
-        b.setStatic(true);
-        b.attachImage(treeTopCenter);
-        b.setName("treetop");
-        b.setFillColor(green);
-        world.add(b);
       } else if (c == green && s == brown) {
         FBox b =  new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
         b.setStatic(true);
         b.attachImage(treeIntersect);
+        b.setName("treetop");
+        b.setFillColor(green);
+        world.add(b);
+      } else if (c == green && w == green && e == green) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        b.attachImage(treeTopCenter);
         b.setName("treetop");
         b.setFillColor(green);
         world.add(b);
