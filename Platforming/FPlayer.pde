@@ -23,7 +23,7 @@ class FPlayer extends FGameObject {
 
   void animate() {
     if (frame >= action.length) frame = 0;
-    if (frame % 5 == 0) {
+    if (frameCount % 5 == 0) {
       if (direction == R) attachImage(action[frame]);
       if (direction == L) attachImage(reverseImage(action[frame]));
       frame++;
@@ -37,12 +37,12 @@ class FPlayer extends FGameObject {
     }
 
     if (akey) {
-      setVelocity(-200, vy);
+      setVelocity(-300, vy);
       action = run;
       direction = L;
     }
     if (dkey) {
-      setVelocity(200, vy);
+      setVelocity(300, vy);
       action = run;
       direction = R;
     }

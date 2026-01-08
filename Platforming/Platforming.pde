@@ -11,13 +11,15 @@ color white = #ffffff;
 color purple = #6f3198;
 color pink = #ffa3b1;
 color yellow = #fff200;
-int gray = #464646;
+color gray = #464646;
+color turquoise = #09c5a3;
 PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
 PImage[] action;
 PImage[] goomba;
+PImage[] thwomp;
 
 int gridSize = 32;
 float zoom = 1.5;
@@ -64,6 +66,12 @@ void loadImages() {
   goomba[0].resize(gridSize, gridSize);
   goomba[1] = loadImage("goomba1.png");
   goomba[1].resize(gridSize, gridSize);
+
+  thwomp = new PImage[2];
+  thwomp[0] = loadImage("thwomp0.png");
+  goomba[0].resize(gridSize, gridSize);
+  thwomp[1] = loadImage("thwomp1.png");
+  goomba[1].resize(gridSize, gridSize);
   enemies=new ArrayList<>();
 }
 void loadWorld(PImage map) {
@@ -105,7 +113,7 @@ void loadWorld(PImage map) {
         FBox b =  new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
         b.setStatic(true);
-
+        b.setSensor(true);
         b.attachImage(treeTrunk);
         b.setName("trunk");
         b.setFillColor(brown);
@@ -165,6 +173,10 @@ void loadWorld(PImage map) {
         FGoomba gmb = new FGoomba(x*gridSize, y*gridSize);
         enemies.add(gmb);
         world.add(gmb);
+      } else if (c == turquoise) {
+        FThwomp thw = new FThwomp(x*gridSize*2, y*gridSize *2);
+        enemies.add(thw);
+        world.add(thw);
       }
     }
   }

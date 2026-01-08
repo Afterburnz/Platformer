@@ -20,7 +20,7 @@ class FGoomba extends FGameObject {
 
   void animate() {
     if (frame >= goomba.length) frame = 0;
-    if (frame % 5 == 0) {
+    if (frameCount % 5 == 0) {
       if (direction == R) attachImage(goomba[frame]);
       if (direction == L) attachImage(reverseImage(goomba[frame]));
       frame++;
@@ -28,11 +28,12 @@ class FGoomba extends FGameObject {
   }
 
   void collide() {
-    if (isTouching("wall") || isTouching("goomba")) {
+    if (isTouching("wall")) {
       direction *= -1;
       setPosition(getX()+direction, getY());
     }
     if (isTouching("player")) {
+      print("???");
       if (player.getY() < getY() - gridSize/2) {
         world.remove(this);
         enemies.remove(this);
