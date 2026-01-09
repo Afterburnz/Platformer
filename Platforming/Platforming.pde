@@ -174,7 +174,7 @@ void loadWorld(PImage map) {
         enemies.add(gmb);
         world.add(gmb);
       } else if (c == turquoise) {
-        FThwomp thw = new FThwomp(x*gridSize*2, y*gridSize *2);
+        FThwomp thw = new FThwomp(x*gridSize, y*gridSize);
         enemies.add(thw);
         world.add(thw);
       }
