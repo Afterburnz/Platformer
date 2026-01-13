@@ -10,7 +10,7 @@ class FThwomp extends FGameObject {
 
 
   FThwomp(float x, float y) {
-    super();
+    super(2);
     setPosition(x, y);
     startPosX = x;
     startPosY = y;
@@ -29,11 +29,11 @@ class FThwomp extends FGameObject {
 
   void collision() {
     if (isTouching("player")) {
-      if (player.getY() > getY()) {
+      if (player.getY() > getY()+ gridSize) {
         player.setPosition(0, 0);
       }
     }
-    if (isTouching("ground") || isTouching("ice") || isTouching("spike")) {
+    if (isTouching("ground") || isTouching("ice") || isTouching("spike") || isTouching("treetop")) {
       if (timer <=0) {
         thwompMode = rise;
       }

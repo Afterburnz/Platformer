@@ -46,10 +46,12 @@ class FPlayer extends FGameObject {
       action = run;
       direction = R;
     }
-    if (wkey) {
-      setVelocity(vx, -250);
-      if (abs(vy) > 0.1) {
-        action = jump;
+    if (isTouching("ground") || isTouching("ice") || isTouching("wall") || isTouching("treetop") || isTouching("bridge")) {
+      if (wkey) {
+        setVelocity(vx, -600);
+        if (abs(vy) > 0.1) {
+          action = jump;
+        }
       }
     }
   }

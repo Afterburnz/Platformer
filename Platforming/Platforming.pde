@@ -13,7 +13,7 @@ color pink = #ffa3b1;
 color yellow = #fff200;
 color gray = #464646;
 color turquoise = #09c5a3;
-PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge;
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
@@ -46,6 +46,8 @@ void loadImages() {
   treeTopW = loadImage("treetop_w.png");
   spike = loadImage("spike.png");
   bridge = loadImage("bridge_center.png");
+  brick = loadImage("brick.png");
+
 
   idle = new PImage[2];
   idle[0] = loadImage("idle0.png");
@@ -72,6 +74,8 @@ void loadImages() {
   goomba[0].resize(gridSize, gridSize);
   thwomp[1] = loadImage("thwomp1.png");
   goomba[1].resize(gridSize, gridSize);
+  
+  
   enemies=new ArrayList<>();
 }
 void loadWorld(PImage map) {
@@ -92,6 +96,8 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(black);
         b.setNoStroke();
+        b.attachImage(brick);
+        b.setFriction(16);
         b.setName("ground");
       } else if (c == gray) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -100,6 +106,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(gray);
         b.setNoStroke();
+        b.attachImage(brick);
         b.setName("wall");
       } else if (c == blue) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -108,6 +115,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(blue);
         b.setNoStroke();
+        b.setFriction(2);
         b.setName("ice");
       } else if (c == brown) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -125,6 +133,7 @@ void loadWorld(PImage map) {
         b.attachImage(treeTopW);
         b.setName("treetop");
         b.setFillColor(green);
+        b.setFriction(16);
         world.add(b);
       } else if (c == green && e != green) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -132,6 +141,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeTopE);
         b.setName("treetop");
+        b.setFriction(16);
         b.setFillColor(green);
         world.add(b);
       } else if (c == green && s == brown) {
@@ -140,6 +150,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeIntersect);
         b.setName("treetop");
+        b.setFriction(16);
         b.setFillColor(green);
         world.add(b);
       } else if (c == green && w == green && e == green) {
@@ -148,6 +159,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeTopCenter);
         b.setName("treetop");
+        b.setFriction(16);
         b.setFillColor(green);
         world.add(b);
       } else if (c == red) {
@@ -177,6 +189,10 @@ void loadWorld(PImage map) {
         FThwomp thw = new FThwomp(x*gridSize, y*gridSize);
         enemies.add(thw);
         world.add(thw);
+      } else if (c == red) {
+        FHammer hmr = new FHammer(x*gridSize, y*gridSize);
+        enemies.add(hmr);
+        world.add(hmr);
       }
     }
   }
