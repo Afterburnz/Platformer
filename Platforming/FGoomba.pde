@@ -33,7 +33,6 @@ class FGoomba extends FGameObject {
       setPosition(getX()+direction, getY());
     }
     if (isTouching("player")) {
-      print("???");
       if (player.getY() < getY() - gridSize/2) {
         world.remove(this);
         enemies.remove(this);

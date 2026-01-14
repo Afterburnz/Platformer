@@ -13,13 +13,14 @@ color pink = #ffa3b1;
 color yellow = #fff200;
 color gray = #464646;
 color turquoise = #09c5a3;
-PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice;
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
 PImage[] action;
 PImage[] goomba;
 PImage[] thwomp;
+PImage[] hammerbro;
 
 int gridSize = 32;
 float zoom = 1.5;
@@ -47,7 +48,7 @@ void loadImages() {
   spike = loadImage("spike.png");
   bridge = loadImage("bridge_center.png");
   brick = loadImage("brick.png");
-
+  hammer = loadImage("hammer.png");
 
   idle = new PImage[2];
   idle[0] = loadImage("idle0.png");
@@ -71,11 +72,15 @@ void loadImages() {
 
   thwomp = new PImage[2];
   thwomp[0] = loadImage("thwomp0.png");
-  goomba[0].resize(gridSize, gridSize);
+  thwomp[0].resize(gridSize*2, gridSize*2);
   thwomp[1] = loadImage("thwomp1.png");
-  goomba[1].resize(gridSize, gridSize);
-  
-  
+  thwomp[1].resize(gridSize*2, gridSize*2);
+
+  hammerbro = new PImage[2];
+  hammerbro[0] = loadImage("hammerbro0.png");
+  hammerbro[0].resize(gridSize*2, gridSize*2);
+  hammerbro[1] = loadImage("hammerbro1.png");
+  hammerbro[1].resize(gridSize*2, gridSize*2);
   enemies=new ArrayList<>();
 }
 void loadWorld(PImage map) {
@@ -106,6 +111,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(gray);
         b.setNoStroke();
+        b.setFriction(16);
         b.attachImage(brick);
         b.setName("wall");
       } else if (c == blue) {
@@ -162,13 +168,6 @@ void loadWorld(PImage map) {
         b.setFriction(16);
         b.setFillColor(green);
         world.add(b);
-      } else if (c == red) {
-        FBox b =  new FBox(gridSize, gridSize);
-        b.setPosition(x*gridSize, y*gridSize);
-        b.setStatic(true);
-        world.add(b);
-        b.setFillColor(red);
-        b.setNoStroke();
       } else if (c == purple) {
         FBox b =  new FBox(gridSize, gridSize);
         b.setPosition(x*gridSize, y*gridSize);
