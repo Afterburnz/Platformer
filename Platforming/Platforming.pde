@@ -1,6 +1,7 @@
 import fisica.*;
 FWorld world;
-
+float spawnX = 0;
+float spawnY = 0;
 color black = #000000;
 color green = #22b14c;
 color red = #ed1c24;
@@ -13,7 +14,9 @@ color pink = #ffa3b1;
 color yellow = #fff200;
 color gray = #464646;
 color turquoise = #09c5a3;
-PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer;
+color lime = #a8e61d;
+color crimson = #990030;
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer, checkpoint;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
@@ -49,7 +52,8 @@ void loadImages() {
   bridge = loadImage("bridge_center.png");
   brick = loadImage("brick.png");
   hammer = loadImage("hammer.png");
-
+  checkpoint = loadImage("checkpoint.png");
+  checkpoint.resize(gridSize, gridSize);
   idle = new PImage[2];
   idle[0] = loadImage("idle0.png");
   idle[1] = loadImage("idle1.png");
@@ -176,6 +180,15 @@ void loadWorld(PImage map) {
         b.setName("spike");
         b.setFillColor(purple);
         world.add(b);
+      } else if (c == lime) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        b.attachImage(checkpoint);
+        b.setName("checkpoint");
+        b.setFillColor(lime);
+        world.add(b);
+        b.setFriction(16);
       } else if (c == pink) {
         FBridge br = new FBridge(x*gridSize, y*gridSize);
         terrain.add(br);

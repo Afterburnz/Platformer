@@ -18,7 +18,7 @@ class FHmr extends FGameObject {
 
   void collide() {
     if (isTouching("player")) {
-      player.setPosition(0, 0);
+      player.setPosition(spawnX,spawnY);
     }
   }
   

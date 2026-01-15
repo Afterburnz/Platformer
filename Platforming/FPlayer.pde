@@ -9,7 +9,7 @@ class FPlayer extends FGameObject {
     super();
     frame = 0;
     direction = R;
-    setPosition(0, 0);
+    setPosition(spawnX, spawnY);
     setName("player");
     setRotatable(false);
     setFillColor(red);
@@ -19,6 +19,7 @@ class FPlayer extends FGameObject {
     handleInput();
     collision();
     animate();
+    respawn();
   }
 
   void animate() {
@@ -46,7 +47,7 @@ class FPlayer extends FGameObject {
       action = run;
       direction = R;
     }
-    if (isTouching("ground") || isTouching("ice") || isTouching("wall") || isTouching("treetop") || isTouching("bridge")) {
+    if (isTouching("ground") || isTouching("ice") || isTouching("wall") || isTouching("treetop") || isTouching("bridge") || isTouching("checkpoint")){
       if (wkey) {
         setVelocity(vx, -600);
         if (abs(vy) > 0.1) {
@@ -58,7 +59,17 @@ class FPlayer extends FGameObject {
 
   void collision() {
     if (isTouching("spike")) {
-      setPosition(0, 0);
+      setPosition(spawnX,spawnY);
+    }
+    if (isTouching("checkpoint")){
+      spawnX = getX();
+      spawnY = getY();
+    }
+  }
+  
+  void respawn(){
+    if (getY() > gridSize * 100){
+      setPosition(spawnX,spawnY);
     }
   }
 }

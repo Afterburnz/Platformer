@@ -23,14 +23,13 @@ class FThwomp extends FGameObject {
     collision();
     move();
     detection();
-    println(thwompMode);
     setPosition(startPosX, getY());
   }
 
   void collision() {
     if (isTouching("player")) {
       if (player.getY() > getY()+ gridSize) {
-        player.setPosition(0, 0);
+        player.setPosition(spawnX,spawnY);
       }
     }
     if (isTouching("ground") || isTouching("ice") || isTouching("spike") || isTouching("treetop")) {
