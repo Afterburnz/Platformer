@@ -16,7 +16,7 @@ color gray = #464646;
 color turquoise = #09c5a3;
 color lime = #a8e61d;
 color crimson = #990030;
-PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer, checkpoint;
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer, checkpoint, gamble, gambleActive;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
@@ -24,7 +24,7 @@ PImage[] action;
 PImage[] goomba;
 PImage[] thwomp;
 PImage[] hammerbro;
-
+float speed = 300;
 int gridSize = 32;
 float zoom = 1.5;
 boolean upkey, downkey, leftkey, rightkey, wkey, akey, skey, dkey, qkey, ekey, spacekey;
@@ -54,6 +54,10 @@ void loadImages() {
   hammer = loadImage("hammer.png");
   checkpoint = loadImage("checkpoint.png");
   checkpoint.resize(gridSize, gridSize);
+  gamble = loadImage("gambling.png");
+  gamble.resize(gridSize, gridSize);
+  gambleActive = loadImage("gamblingActivated.png");
+  gambleActive.resize(gridSize, gridSize);
   idle = new PImage[2];
   idle[0] = loadImage("idle0.png");
   idle[1] = loadImage("idle1.png");
@@ -88,7 +92,8 @@ void loadImages() {
   enemies=new ArrayList<>();
 }
 void loadWorld(PImage map) {
-
+  terrain = new ArrayList<FGameObject>();
+  enemies=new ArrayList<>();
   world = new FWorld(-4000, -4000, 4000, 4000);
   world.setGravity(0, 900);
 
@@ -193,6 +198,10 @@ void loadWorld(PImage map) {
         FBridge br = new FBridge(x*gridSize, y*gridSize);
         terrain.add(br);
         world.add(br);
+      } else if (c == crimson) {
+        FGamble gam = new FGamble(x*gridSize, y*gridSize);
+        terrain.add(gam);
+        world.add(gam);
       } else if (c == yellow) {
         FGoomba gmb = new FGoomba(x*gridSize, y*gridSize);
         enemies.add(gmb);

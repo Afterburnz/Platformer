@@ -38,12 +38,12 @@ class FPlayer extends FGameObject {
     }
 
     if (akey) {
-      setVelocity(-300, vy);
+      setVelocity(-speed, vy);
       action = run;
       direction = L;
     }
     if (dkey) {
-      setVelocity(300, vy);
+      setVelocity(speed, vy);
       action = run;
       direction = R;
     }
@@ -59,7 +59,8 @@ class FPlayer extends FGameObject {
 
   void collision() {
     if (isTouching("spike")) {
-      setPosition(spawnX,spawnY);
+      loadWorld(map);
+      loadPlayer();
     }
     if (isTouching("checkpoint")){
       spawnX = getX();

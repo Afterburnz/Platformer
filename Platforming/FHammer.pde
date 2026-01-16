@@ -44,7 +44,8 @@ class FHammer extends FGameObject {
         enemies.remove(this);
         player.setVelocity(player.getVelocityX(), -300);
       } else {
-        player.setPosition(spawnX,spawnY);
+        loadWorld(map);
+        loadPlayer();
       }
     }
   }
