@@ -5,6 +5,7 @@ class FBridge extends FGameObject {
     setName("bridge");
     attachImage(bridge);
     setStatic(true);
+    setFriction(24);
   }
 
   void act() {

@@ -59,7 +59,7 @@ class FHammer extends FGameObject {
   void hammer() {
     hammerTimer ++;
 
-    if (hammerTimer > 30) {
+    if (hammerTimer > 75) {
       FHmr h = new FHmr(getX(), getY());
       h.setVelocity(direction*250, -200);
       world.add(h);

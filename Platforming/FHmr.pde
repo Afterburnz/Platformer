@@ -25,7 +25,7 @@ class FHmr extends FGameObject {
   
   void deletion(){
     hammerDeletionTimer++;
-    if (hammerDeletionTimer > 450){
+    if (hammerDeletionTimer > 45){
       world.remove(this);
     }
   }

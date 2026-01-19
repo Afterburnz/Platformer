@@ -111,7 +111,7 @@ void loadWorld(PImage map) {
         b.setFillColor(black);
         b.setNoStroke();
         b.attachImage(brick);
-        b.setFriction(16);
+        b.setFriction(24);
         b.setName("ground");
       } else if (c == gray) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -120,7 +120,7 @@ void loadWorld(PImage map) {
         world.add(b);
         b.setFillColor(gray);
         b.setNoStroke();
-        b.setFriction(16);
+        b.setFriction(24);
         b.attachImage(brick);
         b.setName("wall");
       } else if (c == blue) {
@@ -148,7 +148,7 @@ void loadWorld(PImage map) {
         b.attachImage(treeTopW);
         b.setName("treetop");
         b.setFillColor(green);
-        b.setFriction(16);
+        b.setFriction(24);
         world.add(b);
       } else if (c == green && e != green) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -156,7 +156,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeTopE);
         b.setName("treetop");
-        b.setFriction(16);
+        b.setFriction(24);
         b.setFillColor(green);
         world.add(b);
       } else if (c == green && s == brown) {
@@ -165,7 +165,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeIntersect);
         b.setName("treetop");
-        b.setFriction(16);
+        b.setFriction(24);
         b.setFillColor(green);
         world.add(b);
       } else if (c == green && w == green && e == green) {
@@ -174,7 +174,7 @@ void loadWorld(PImage map) {
         b.setStatic(true);
         b.attachImage(treeTopCenter);
         b.setName("treetop");
-        b.setFriction(16);
+        b.setFriction(24);
         b.setFillColor(green);
         world.add(b);
       } else if (c == purple) {
@@ -193,7 +193,7 @@ void loadWorld(PImage map) {
         b.setName("checkpoint");
         b.setFillColor(lime);
         world.add(b);
-        b.setFriction(16);
+        b.setFriction(24);
       } else if (c == pink) {
         FBridge br = new FBridge(x*gridSize, y*gridSize);
         terrain.add(br);
@@ -221,6 +221,7 @@ void loadWorld(PImage map) {
 void loadPlayer() {
   player = new FPlayer();
   world.add(player);
+  player.setPosition(gridSize * 18, gridSize * 43);
 }
 void draw() {
   background(white);

@@ -49,7 +49,7 @@ class FPlayer extends FGameObject {
     }
     if (isTouching("ground") || isTouching("ice") || isTouching("wall") || isTouching("treetop") || isTouching("bridge") || isTouching("checkpoint")){
       if (wkey) {
-        setVelocity(vx, -600);
+        setVelocity(vx, -500);
         if (abs(vy) > 0.1) {
           action = jump;
         }

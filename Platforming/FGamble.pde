@@ -6,13 +6,13 @@ class FGamble extends FGameObject {
     setPosition(x, y);
     setName("gamble");
     setStatic(true);
+    setFriction(24);
   }
 
   void act() {
     imageSwitch();
     collision();
     println(speed);
-    
   }
   void collision() {
     float randomizer = random(0, 1);
@@ -30,11 +30,11 @@ class FGamble extends FGameObject {
         if (randomizer >=0.75) {
           speed = speed * 2;
         }
-        timer = 300;
-        boostTimer = -300;
+        timer = 120;
+        boostTimer = -120;
       }
     }
-    if (boostTimer >0){
+    if (boostTimer >0) {
       speed = 300;
     }
     timer --;
