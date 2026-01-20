@@ -221,7 +221,7 @@ void loadWorld(PImage map) {
 void loadPlayer() {
   player = new FPlayer();
   world.add(player);
-  player.setPosition(gridSize * 18, gridSize * 43);
+  //player.setPosition(gridSize * 4, gridSize * 70);
 }
 void draw() {
   background(white);
