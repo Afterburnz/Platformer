@@ -3,6 +3,7 @@ class FPlayer extends FGameObject {
   int frame;
   int direction;
   boolean speedChange;
+
   int boostTimer = 0;
 
   FPlayer() {
@@ -56,7 +57,7 @@ class FPlayer extends FGameObject {
     }
     if (isTouching("ground") || isTouching("ice") || isTouching("wall") || isTouching("treetop") || isTouching("bridge") || isTouching("checkpoint")|| isTouching("thwomp")) {
       if (wkey) {
-        setVelocity(vx, -500);
+        setVelocity(vx, jumpHeight);
         if (abs(vy) > 0.1) {
           action = jump;
         }
@@ -73,6 +74,10 @@ class FPlayer extends FGameObject {
       spawnX = getX();
       spawnY = getY();
     }
+    if (isTouching("winpad")) {
+      mode = 3;
+      setPosition(0,-gridSize);
+    }
   }
 
   void respawn() {
@@ -80,6 +85,7 @@ class FPlayer extends FGameObject {
       setPosition(spawnX, spawnY);
     }
   }
+
   void gambling() {
     float randomizer = random(0, 1);
     if (speedChange == true) {

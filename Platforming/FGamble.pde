@@ -11,7 +11,6 @@ class FGamble extends FGameObject {
   void act() {
     imageSwitch();
     collision();
-    println(speed);
   }
   void collision() {
 

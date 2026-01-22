@@ -18,9 +18,19 @@ void keyReleased() {
   if (key == 'D' || key == 'd') dkey = false;
   if (key == 'Q' || key == 'q') qkey = false;
   if (key == 'E' || key == 'e') ekey = false;
+  if (key == 'P' || key == 'p') mode = 2;
   if (key == ' ') spacekey = false;
   if (keyCode == DOWN) downkey = false;
   if (keyCode == UP) upkey = false;
   if (keyCode == LEFT) leftkey = false;
   if (keyCode == RIGHT) rightkey = false;
+}
+
+void click() {
+  mouseReleased = false;
+  if (mousePressed) wasPressed = true;
+  if (wasPressed && !mousePressed) {
+    mouseReleased = true;
+    wasPressed = false;
+  }
 }

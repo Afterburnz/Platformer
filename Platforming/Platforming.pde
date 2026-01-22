@@ -6,7 +6,7 @@ color black = #000000;
 color green = #22b14c;
 color red = #ed1c24;
 color blue = #00b7ef;
-color orange = #F0A000;
+color orange = #ff7e00;
 color brown = #9c5a3c;
 color white = #ffffff;
 color purple = #6f3198;
@@ -16,7 +16,9 @@ color gray = #464646;
 color turquoise = #09c5a3;
 color lime = #a8e61d;
 color crimson = #990030;
-PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer, checkpoint, gamble, gambleActive;
+color lightPurple = #b5a5d5;
+
+PImage map, treeIntersect, treeTrunk, treeTopCenter, treeTopE, treeTopW, spike, bridge, brick, ice, hammer, checkpoint, gamble, gambleActive, noJump, winpad;
 PImage[] idle;
 PImage[] jump;
 PImage[] run;
@@ -24,12 +26,24 @@ PImage[] action;
 PImage[] goomba;
 PImage[] thwomp;
 PImage[] hammerbro;
+
 float speed = 300;
+float jumpHeight = -500;
 int gridSize = 32;
-float zoom = 1.5;
+float zoom = 1.25;
+
 boolean upkey, downkey, leftkey, rightkey, wkey, akey, skey, dkey, qkey, ekey, spacekey;
+boolean mouseReleased;
+boolean wasPressed;
+
 ArrayList<FGameObject> terrain;
 ArrayList<FGameObject> enemies;
+
+final int INTRO = 0;
+final int PAUSE = 2;
+final int WINSCREEN = 3;
+int mode = 0;
+Button [] myButtons;
 FPlayer player;
 
 void setup() {
@@ -39,6 +53,13 @@ void setup() {
   loadImages();
   loadWorld(map);
   loadPlayer();
+  myButtons=new Button[6];
+  myButtons[0] = new Button("Press to start", width/2, 500, 200, 200, pink, blue);
+  myButtons[1] = new Button("Press to replay", width/2, 500, 300, 200, green, pink);
+  myButtons[2] = new Button("Continue", width/2, 500, 300, 100, blue, pink);
+  PFont mono;
+  mono = createFont("Minecraft.ttf", 128);
+  textFont(mono);
 }
 
 void loadImages() {
@@ -58,6 +79,12 @@ void loadImages() {
   gamble.resize(gridSize, gridSize);
   gambleActive = loadImage("gamblingActivated.png");
   gambleActive.resize(gridSize, gridSize);
+  noJump = loadImage("nojump.png");
+  noJump.resize(gridSize, gridSize);
+  winpad = loadImage("winpad.png");
+  winpad.resize(gridSize, gridSize);
+  ice = loadImage("ice.png");
+  ice.resize(gridSize, gridSize);
   idle = new PImage[2];
   idle[0] = loadImage("idle0.png");
   idle[1] = loadImage("idle1.png");
@@ -131,6 +158,7 @@ void loadWorld(PImage map) {
         b.setFillColor(blue);
         b.setNoStroke();
         b.setFriction(2);
+        b.attachImage(ice);
         b.setName("ice");
       } else if (c == brown) {
         FBox b =  new FBox(gridSize, gridSize);
@@ -194,6 +222,15 @@ void loadWorld(PImage map) {
         b.setFillColor(lime);
         world.add(b);
         b.setFriction(24);
+      } else if (c == lightPurple) {
+        FBox b =  new FBox(gridSize, gridSize);
+        b.setPosition(x*gridSize, y*gridSize);
+        b.setStatic(true);
+        b.attachImage(winpad);
+        b.setName("winpad");
+        b.setFillColor(lightPurple);
+        world.add(b);
+        b.setFriction(24);
       } else if (c == pink) {
         FBridge br = new FBridge(x*gridSize, y*gridSize);
         terrain.add(br);
@@ -202,6 +239,10 @@ void loadWorld(PImage map) {
         FGamble gam = new FGamble(x*gridSize, y*gridSize);
         terrain.add(gam);
         world.add(gam);
+      } else if (c == orange) {
+        FNoJump nj = new FNoJump(x*gridSize, y* gridSize);
+        terrain.add(nj);
+        world.add(nj);
       } else if (c == yellow) {
         FGoomba gmb = new FGoomba(x*gridSize, y*gridSize);
         enemies.add(gmb);
@@ -221,12 +262,20 @@ void loadWorld(PImage map) {
 void loadPlayer() {
   player = new FPlayer();
   world.add(player);
-  //player.setPosition(gridSize * 4, gridSize * 70);
 }
 void draw() {
   background(white);
   drawWorld();
   actWorld();
+
+  if (mode==INTRO) {
+    intro();
+  } else if (mode ==PAUSE) {
+    pause();
+  } else if (mode == WINSCREEN) {
+    winscreen();
+  }
+  click();
 }
 void actWorld() {
   player.act();
